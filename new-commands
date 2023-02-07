@@ -1,0 +1,668 @@
+=================================================================================
+continue from the Enterprise Console GUI  to install custom controller  =====by adding Enterprise console privetkey we put on the NotePad
+#tail -f /opt/appdynamics/platform/platform-admin/logs/platform-admin-server.log
+
+nmtui
+du -sh filename (to get size )
+
+Install Java
+sudo groupadd tomcat
+sudo useradd -s /bin/false -g tomcat -d /opt/tomcat tomcat
+cd /tmp
+curl -O https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.63/bin/apache-tomcat-9.0.63.tar.gz
+
+&nbsp;  &nbsp;  &nbsp;
+https://196.202.19.58:10443/ts
+https://41.64.70.66:10443/ts
+
+adding host
+matrix for controller sizing 
+
+
+/opt/appdynamics/platform/platform-admin/archives/controller/20.11.1-1963/playbooks
+
+
+DB Data Directory
+/opt/appdynamics/platform/product/controller/db/data
+
+
+/usr/local/apache/apache-tomcat-7/bin/shutdown.sh
+/usr/local/apache/apache-tomcat-7/bin/startup.sh
+
+
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************
+ sudo apt-get install libaio1
+ sudo apt-get install numactl
+ sudo apt-get install tzdata
+ sudo apt-get install libncurses5
+
+https://www.99ideas.in/blog-post/increasing-file-descriptors-and-open-files-limit-in-centos-7/
+
+==============================Error for the below ===============================================
+com.appdynamics.orcha.core.exceptions.OrchaRunnerException: Error running playbook at com.appdynamics.orcha.core.OrchaRunnerImpl.runPlaybook(OrchaRunnerImpl.java:220)
+=======================================================================================================
+
+
+
+
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************
+
+ cd /opt/appdynamics/platform/platform-admin
+
+bin/platform-admin.sh login -u admin -p AppD123
+bin/platform-admin.sh stop-platform-admin
+
+
+bin/platform-admin.sh start-platform-admin
+bin/platform-admin.sh start-controller-db
+
+bin/platform-admin.sh start-controller-appserver
+ 
+netstat -ntlp |grep -i 9191
+ curl 127.0.0.1:9191
+ 
+*****************************************************Enterprise Console Database**************************************************************************************
+#cd /opt/appdynamics/platform/mysql/
+# ./bin/mysql -u root -p 
+# ./bin/mysql -u root -p --socket=<platform_admin_home>/mysql/mysql.sock --port=3377
+
+Error : 2002 (HY000): Can't connect to local MySQL through socket '/tmp/mysql.sock' (2)
+
+#ps -ef | grep mysql ===> from the output grep the --socket with one with port that I need
+## ./bin/mysql -u root -p --socket=<platform_admin_home>/mysql/mysql.sock --port=3377
+
+
+mysql> show databases;
+mysql> use platform_admin;
+mysql>show tables;
+exit
+
+*********************************************************************
+For the Controller DB: 
+#cd opt/appdynamics/platform/product/controller/
+#./bin/controller.sh login-db
+mysql> show databases;
+mysql> use controller;
+mysql>show tables;
+exit
+
+#./bin/startcontroller.sh ==>starting both contoller glassfish server and the db together
+#./bin/controller.sh start-appserver or start-db   ==> starts each one alone
+
+**************************************************************************************************
+=========================================================================================================
+Managing Controller Environment –///// Monitoring Appdynamics itself/////////
+You can use an AppDynamics internal java agent deployed automatically during controller installation to monitor your
+controllers. The agent location is <controller_home>/appserver/glassfish/domains/domain1/appagent
+Everything is setup for you and just need to access it.
+You can assess the self monitoring URL via
+http://<controller_host>:8090/controller?enableAccounts=true and Login with
+Account : system
+Username: root
+Password: <password>
+
+
+**************************************************************************************************
+=================================================================================================
+-------Controller as a service to start automatically.-------------------
+#cd /opt/appdynamics/platform/products/controller/controller-ha/
+#./set_mysql_password_file.sh -p password
+#./init/install-init.sh
+
+
+**************************************************************************************************
+=============================================================================================
+
+Managing Controller Environment – Controller Deep Link
+Deep link are embedded links you see in alerts and are configured to be external URL access to the controller. Deep link can be
+changed either via Enterprise console (CLI or GUI) or Glassfish domain.xml file for older controller versions.
+./platform-admin.sh update-service-configurations --service controller --job update-configs --args controllerExternalUrl=<serverprotocol>://<controller-host>:<controller-port>
+./platform-admin.sh update-service-configurations --service controller --job update-configs --args controllerExternalUrl=http://apm.newgenbank.com:8090
+
+the same from Enterprise GUI configration tab ExternalUrl
+==============================================================================================================================================
+
+
+
+
+
+
+sudo apt-get install openjdk-8-jdk
+/usr/lib/jvm/java-1.8.0-openjdk-amd64/bin/java
+
+
+echo $JAVA_HOME
+
+
+
+export JAVA_HOME=/usr/lib/jvm/jre-1.8.0-openjdk-1.8.0.292.b10-1.el7_9.x86_64/bin/java 
+export JAVA_HOME="export JAVA_HOME=/usr/lib/jvm/jre-1.8.0-openjdk-1.8.0.292.b10-1.el7_9.x86_64/bin/java"
+export PATH=$JAVA_HOME/bin:$PATH
+
+
+check java path right
+
+port 9080 ,,and host adding 
+
+
+export CLASSPATH=.:$JAVA_HOME/jre/lib:$JAVA_HOME/lib:$JAVA_HOME/lib/tools.jar
+
+
+/usr/lib/jvm/jre-1.8.0-openjdk-1.8.0.292.b10-1.el7_9.x86_64/bin/jar -xvf Supercar-Trader.war  
+
+/usr/lib/jvm/jre-1.8.0-openjdk-1.8.0.282.b08-1.el7_9.x86_64/bin/java
+export PATH=$PATH:$JAVA_HOME/bin
+
+sudo update-alternatives --set java /usr/lib/jvm/jdk1.8.0_version/bin/java
+
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************
+https://docs.appdynamics.com/21.5/en/application-performance-monitoring-platform/events-service-deployment/install-the-events-service-on-windows
+
+
+bin/platform-admin.sh add-credential --credential-name eventsservice-01 --type ssh --user-name root --ssh-key-file /root/.ssh/appd-analytics.pem
+bin/platform-admin.sh add-credential --credential-name 10.0.30.45 --type ssh --user-name root --ssh-key-file /root/.ssh/appd-analytics.pem
+
+
+
+
+
+bin/platform-admin.sh add-hosts --host-file <file path to host file> --credential <credential name> 
+
+/opt/appdynamics/platform/product/controller/db/data
+
+bin/platform-admin.sh remove-dead-hosts --hosts <host name>
+
+
+
+
+./bin/platform-admin.sh add-hosts --hosts eventsservice --credential "Events Service" --platform-name AppDPlatform
+./bin/platform-admin.sh add-hosts --hosts eventsservice-01 --credential eventsservice-01 --platform-name AppDPlatform
+./bin/platform-admin.sh add-hosts --hosts 10.0.30.45 --credential eventsservice-01 --platform-name AppDPlatform
+
+"bin/platform-admin.sh install-events-service --profile prod --hosts eventsservice-01 eventsservice-02 eventsservice-03  --data-dir /opt/appdynamics/eventsservice --platform-name AppDPlatform"
+
+"bin/platform-admin.sh install-events-service --profile prod --hosts 10.0.30.45 10.0.30.46 10.0.30.47  --data-dir /opt/appdynamics/eventsservice --platform-name AppDPlatform"
+
+
+eventsservice-01 10.0.30.xx
+eventsservice-02 10.0.30.xx
+eventsservice-03 10.0.30.xx
+
+
+scp ~/.ssh/myserver.pub host1:/tmp
+scp ~/.ssh/myserver.pub host2:/tmp
+scp ~/.ssh/myserver.pub host3:/tmp
+
+cat /tmp/appd-analytics.pub >> .ssh/authorized_keys
+chmod 600 ~/.ssh/authorized_keys
+
+
+
+ bin/platform-admin.sh submit-job --platform-name AppDPlatform --service events-service --job stop
+ bin/platform-admin.sh submit-job --platform-name AppDPlatform --service events-service --job start
+
+bin/platform-admin.sh submit-job --platform-name AppDPlatform --service events-service --job restart-cluster
+
+bin/platform-admin.sh list-hosts
+./bin/platform-admin.sh list-nodes --service events-service
+./bin/platform-admin.sh show-events-service-health 
+ bin/platform-admin.sh retrieve-events-service-logs
+ 
+
+
+cd /opt/appdynamics/platform/product/events-service/processor
+bin/events-service.sh stop -f && rm -r events-service-api-store.id && rm -r elasticsearch.id
+nohup ./bin/events-service.sh start -p ./conf/events-service-api-store.properties &
+
+ea95542c-7c24-4c0e-9934-9c7bf389525b
+
+sudo <installation_dir>/events-service/processor/bin/tool/tune-system.sh
+chmod +x tune-system.sh 
+./tune-system.sh
+
+ curl http://10.0.30.45:9080/_ping 
+
+appdynamics.on.premise.event.service.url
+https://10.0.30.60:9443/v1
+
+curl http://10.0.30.47:9081/healthcheck?pretty=true
+./bin/events-service.sh check-health -hp localhost:9081
+
+ad.es.node.unicast.hosts=eventsservice-01:9300,eventsservice-02:9300,eventsservice-03:9300
+
+
+
+bin/events-service.sh --service events-service --job install -p conf\events-service-api-store.properties
+
+ netstat -ant | grep "9080\|9081\|9200\|9300"
+
+ ps -ef | grep "event"
+
+
+
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************
+
+bin/platform-admin.sh install-events-service --profile prod --hosts <Event_Node_IP> --data-dir “/home/dgisvcdyn/appdynamics” --platform-name DHFLGI-APPD
+bin/platform-admin.sh install-events-service --profile Prod --hosts 10.0.30.43 --data-dir “/opt/appdynamics/eventsservice” --platform-name AppDPlatform
+
+
+
+
+
+ "" ./bin/platform-admin.sh submit-job --service events-service --job install --args serviceActionHost=10.0.30.45 profile=Prod ""
+
+
+bin/platform-admin.sh submit-job --job uninstall --service events-service --platform-name  AppDPlatform  --hosts 10.0.30.45
+
+
+
+
+
+ vim /root/.ssh/id_rsa
+
+
+
+ssh-keygen -t rsa -b 2048 -N '' -m pem
+
+
+
+sudo netstat -tulpn | grep LISTEN
+How to make service startup on linux
+
+
+
+
+
+/opt/appdynamics/platform
+Database Port: 3377 (default)
+Enable Https Connection: n
+Enterprise Console Port: 9191 (default)
+
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************
+cd /opt/appdynamics/eum/eum-processor/
+bin/eum.sh stop
+ps -ef | grep -i eum | grep -v grep (no process should be listed)
+bin/eum.sh start
+ps -ef | grep -i eum | grep -v grep (one process should be listed)
+
+
+/opt/appd/platform/product/controller/license 
+http://[your-ip-address]:8090/controller/admin.jsp
+appdynamics.es.eum.key
+
+eum.beacon.host = [your-ip-address]:7001 #That should be the EUM Server IP Address
+eum.beacon.https.host = https://[your-ip-address]:7002 #That should be the EUM Server IP Address
+eum.cloud.host = http://localhost:7001 #That should be the EUM Server IP Address
+eum.es.host = [your-ip-address]:9080 #That should be the Events Server IP Address
+eum.mobile.screenshot.host = [your-ip-address]:7001 #That should be the EUM Server IP Address
+
+
+
+Select Installation Type: 1 (Demo)
+Database Port: 3388 (default)
+HTTP Port: 7001 (default)
+HTTPS Port: 7002 (default)
+
+http://[your-ip-address]:7001/eumaggregator/ping
+
+
+cd /opt/appdynamics/eum/eum-processor/bin/
+vim eum.properties
+
+
+analytics.enabled=true
+analytics.serverHost=[your-ip-address] #That should be the Events Server IP Address
+analytics.accountAccessKey=[eum_key] (the one collected in step 2)
+
+
+./bin/platform-admin.sh retrieve-events-service-logs
+./bin/platform-admin.sh list-events-service-nodes
+./bin/platform-admin.sh show-events-service-health
+ http://[your-ip-address]:9080/_ping //ping Event services 
+/opt/appdynamics/platform/product/events-service/processor/conf (properties)
+
+
+ps -ef | grep -i eum | grep -v grep
+
+
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************
+Java Agent instillation 
+
+cd /usr/local/apache/apache-tomcat-7/bin
+export CATALINA_OPTS="$CATALINA_OPTS -javaagent:/opt/appdynamics/javaagent/javaagent.jar"
+
+
+sudo netstat -tulpn | grep LISTEN
+
+sudo ln -s /path/to/phantomjs /usr/local/bin/
+
+/opt/appdynamics/platform/product/controller/reporting_service/reports/node_modules/phantomjs-prebuilt/lib/phantom/bin/phantomjs
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************
+
+Machine Agent 
+cd /opt/appdynamics/machineagent/bin
+
+nohup ./machine-agent &
+
+ps -ef | grep machine
+
+in windows 
+java -jar machineagent.jar 
+
+
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************
+
+
+
+Database Agent
+
+cd /opt/appdynamics/dbagent
+nohup java -Dappdynamics.agent.maxMetrics=300000 -Ddbagent.name=DBMon-Lab-Agent -jar db-agent.jar &
+
+java -Xmx1536m -jar <db_agent_home>/db-agent.jar 
+ps -ef | grep db-agent
+
+
+
+
+
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************
+
+
+command you can use to test connectivity?
+
+curl -v https://<controllerHost>:<port>/controller
+telnet <controllerHost>
+traceroute <controllerHost>
+
+
+
+sudo fuser -k 80/tcp
+
+b0aa9bc5-e70c-4dd6-8efa-f9720454a11b
+
+
+
+
+
+Uncheck all the boxes on Web Service.
+Scroll down to find the Servlet settings.
+Check the box Enable Servlet Filter Detection (all three boxes should be checked on Servlet settings).
+
+Select the Call Graph Settings tab from the Instrumentation window.
+Scroll down until you see the SQL Capture Settings.
+
+
+
+
+
+
+
+
+https://github.com/sherifadel90/AppDynamicsPlatformInstallation/blob/master/README.md
+
+https://docs.appdynamics.com/display/PRO43/EUM+Server+Requirements
+
+
+
+eum-processor-launcher.vmoptions
+-Xmx6471m
+-Xms6471m
+
+
+***************************************************************
+
+bin/platform-admin.sh submit-job --platform-name AppDPlatform --service events-service --job restart-node --args nodeActionHost=10.0.30.45
+
+
+http://192.168.174.129:8090/controller
+https://github.com/sherifadel90/AppDynamicsPlatformInstallation
+
+export CATALINA_OPTS="$CATALINA_OPTS -javaagent:/opt/appdynamics/javaagent/javaagent.jar"
+
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************
+
+
+upstream events-service-api {
+   
+   server 10.0.30.45:9080;
+   server 10.0.30.46:9080;
+   server 10.0.30.47:9080;
+   keepalive 15;
+}
+server {
+   listen 9080;
+   location / {
+      proxy_pass http://events-service-api;
+      proxy_http_version 1.1;
+      proxy_set_header Connection "Keep-Alive";
+      proxy_set_header Proxy-Connection "Keep-Alive";
+   }
+}
+semanage port -a -t http_port_t -p tcp 9080
+firewall-cmd --permanent --add-port=9080/tcp
+firewall-cmd --reload
+systemctl restart nginx.service
+################################################################################
+keytool -import -trustcacerts -v -alias events_service -file /path/to/CA-cert.txt -keystore cacerts.jks
+
+
+
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************
+ Enable the file descriptor and process limits as follows: 
+Open the following file for editing: /etc/pam.d/common-session inside login file
+
+ Add the line: session required pam_limits.so
+
+JVM Runtime does not support Modules
+
+
+source code (.Java) Compilar code.class JVM naitve code 
+
+
+
+
+l->T-kiH932_   password 
+https://community.appdynamics.com/t5/Controller-SaaS-On-Premise/Controller-installation-Disk-Space-issue/m-p/38520#M2024
+
+selfservice-free-account 
+
+
+
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************
+
+sudo firewall-cmd --state
+sudo systemctl stop firewalld
+sudo systemctl disable firewalld
+sudo systemctl mask --now firewalld
+sudo systemctl status firewalld
+yum install iptables-services
+systemctl enable iptables
+
+iptables -A INPUT -p tcp -m tcp --dport 9080 -m conntrack --ctstate NEW -j ACCEPT
+iptables -A INPUT -p tcp -m tcp --dport 9081 -m conntrack --ctstate NEW -j ACCEPT
+iptables -A INPUT -p tcp -m tcp --dport 9300:9400 -m conntrack --ctstate NEW -j ACCEPT
+iptables-save
+
+iptables -I INPUT -p tcp --dport 80 -j ACCEPT
+
+iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport 9080 -j ACCEPT
+iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport 9081 -j ACCEPT
+iptables -A INPUT -m state --state NEW -m multiport -p tcp --dports 9300:9400 -j ACCEPT
+
+
+iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport 9080 -j ACCEPT
+iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport 9081 -j ACCEPT
+iptables -A INPUT -m state --state NEW -m multiport -p tcp --dports 9300:9400 -j ACCEPT
+
+iptables -A RH-Firewall-1-INPUT -m state --state NEW -m tcp -p tcp --dport 9080 -j ACCEPT
+iptables -A RH-Firewall-1-INPUT -m state --state NEW -m tcp -p tcp --dport 9080 -j ACCEPT
+
+sudo ufw allow 9080/tcp
+
+service iptables save
+netstat -anp | grep LISTEN | grep :9080
+firewall-cmd --zone=public --add-port=9080/tcp --permanent
+iptables -A IN_public_allow -p tcp -m tcp --dport 9080 -m conntrack --ctstate NEW -j ACCEPT
+
+
+iptables -A INPUT -m state --state NEW -p tcp --dport 9080 -j ACCEPT
+
+# firewall-cmd --permanent --add-port=22/tcp
+#firewall-cmd --permanent --add-service=http
+# firewall-cmd --reload
+OR
+$ sudo ufw allow 22/tcp
+$ sudo ufw reload 
+
+yum install -y epel-release
+yum install -y ufw
+
+sudo fuser -k 80/tcp
+sudo fuser -k 443/tcp
+sudo service nginx restart
+
+yum install sysstat
+mpstat
+mpstat -P ALL
+
+ssh-keygen
+ssh-keygen -t rsa -b 2048 -N '' -m pem
+ssh-copy-id root@10.0.30.44
+
+
+sudo pkill -f nginx & wait $!
+sudo systemctl start nginx
+
+# yum install policycoreutils-python-utils
+# yum install policycoreutils-python
+
+semanage port -a -t http_port_t -p tcp 9080
+semanage port -m -t http_port_t -p tcp 9080
+
+
+sudo vim /var/www/html/index.html
+
+
+
+
+
+
+
+http {
+          upstream events-service-api {
+   server 10.0.30.60:9080;
+   server 10.0.30.45:9080;
+   server 10.0.30.46:9080;
+   server 10.0.30.47:9080;
+   keepalive 15;
+}
+server {
+   listen 9080;
+   location / {
+      proxy_pass http://events-service-api;
+      proxy_http_version 1.1;
+      proxy_set_header Connection "Keep-Alive";
+      proxy_set_header Proxy-Connection "Keep-Alive";
+   }
+}
+}
+
+
+upstream events-service-api {
+  server 10.0.30.60:9080;
+   server 10.0.30.45:9080;
+   server 10.0.30.46:9080;
+   server 10.0.30.47:9080;
+   keepalive 15;
+}
+server {
+   listen 9080;
+   location / {
+      proxy_pass http://events-service-api;
+      proxy_http_version 1.1;
+      proxy_set_header Connection "Keep-Alive";
+      proxy_set_header Proxy-Connection "Keep-Alive";
+
+
+
+
+( 20/ 26) Load Events Service cluster configuration: SUCCESS
+( 21/ 26) Load all ES cluster hosts into execution context.: SUCCESS
+( 22/ 26) es_cluster_health_stage: FAILED
+Events Service installation failed.
+Failure occurred: es_cluster_health_stage
+Error message:
+Unable to check health of Events Service hosts [eventsservice, eventsservice-02, eventsservice-03] through port 9080.
+   }
+}
+
+
+Caused by: com.fasterxml.jackson.databind.exc.ValueInstantiationException: Cannot construct instance of `com.appdynamics.common.framework.version.CalendarVersion`, problem: 4.5.2.20651is not a valid calendar version
+
+
+
+
+ [ERROR]  [main]  [c.a.common.framework.AbstractApp]  Severe error occurred while starting application [events-service-api-store]. Shutdown procedure will commence soon
+com.google.inject.ProvisionException: Unable to provision, see the following errors:
+
+1) Error in custom provider, java.lang.IllegalArgumentException: Service key not provided in any source.
+  at com.appdynamics.analytics.client.module.ServiceKeyProviderModule.provideServiceKey(ServiceKeyProviderModule.java:47)
+  at com.appdynamics.analytics.client.module.ServiceKeyProviderModule.provideServiceKey(ServiceKeyProviderModule.java:47)
+  while locating com.appdynamics.analytics.client.module.ServiceKey
+    for parameter 4 at com.appdynamics.analytics.processor.slm.resource.SlmResourceModule.createSlmConfigService(SlmResourceModule.java:57)
+  at com.appdynamics.analytics.processor.slm.resource.SlmResourceModule.createSlmConfigService(SlmResourceModule.java:57)
+  at com.appdynamics.analytics.processor.slm.resource.SlmResourceModule.createSlmConfigService(SlmResourceModule.java:57)
+  while locating com.appdynamics.analytics.processor.slm.service.performance.SlmPerfConfigService
+    for parameter 1 at com.appdynamics.analytics.processor.slm.resource.SlmResourceModule.onStart(SlmResourceModule.java:114)
+  while locating com.appdynamics.analytics.processor.slm.resource.SlmResourceModule
+Caused by: java.lang.IllegalArgumentException: Service key not provided in any source.
+        at com.appdynamics.analytics.client.module.ServiceKeyProviderModule.provideServiceKey(ServiceKeyProviderModule.java:49)
+        at com.appdynamics.analytics.client.module.ServiceKeyProviderModule$$FastClassByGuice$$2e553554.invoke(<generated>)
+        at com.google.inject.internal.ProviderMethod$FastClassProviderMethod.doProvision(ProviderMethod.java:272)
+        at com.google.inject.internal.ProviderMethod.get(ProviderMethod.java:172)
+
+
+
+
+
+java.lang.IllegalArgumentException: Service key not provided in any source
+
+
+
+
+
+
+
+
+
+
+
+workgroup = WORKGROUP
+server string = Samba Server %v
+netbios name = centos
+security = user
+map to guest = bad user
+dns proxy = no
+#============================ Share Definitions ============              
+
+
+20.13.32.50
+
+ cd /opt/appdynamics/eum/eum-processor
+ ./bin/provision-license /opt/appdynamics/platform/product/controller/license.lic
+timedatectl set-time 2020-11-04         
+
+
+
+
+
+Validating host and port connection information...
+Setup requires at least 3573430 KB of free space to install, but the selected drive only has 1450032 KB available.
+                                                                                                                        
+
+
+
+======================================================================================
+Check if the required data directories have sufficient space:
+You can modify property  controller_data_min_disk_space_in_mb in file controller-medium.groovy to lower value at /platform-admin/archives/controller/4.5/playbooks/controller                                                                                                
