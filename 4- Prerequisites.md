@@ -8,10 +8,14 @@ Before setting up AppDynamics, it is important to validate and configure the fol
 ```vim /etc/hosts``` 
 
 3- Configure Ulimits (file descriptors) :
-```ulimit -S -n
-ulimit -H -u```
-and by editig 
-```vim /etc/security/limits.d/appdynamics.conf```
+```
+ulimit -S -n
+ulimit -H -u
+```
+and by editig
+```
+vim /etc/security/limits.d/appdynamics.conf
+```
 ```
 root     soft    nofile          96000
 root     hard    nofile          96000
@@ -36,11 +40,12 @@ root    hard    memlock         unlimited
    Check the RAM on the Controller to ensure it meets the profile requirements.
    
 8- Create passwordless SSH connection:
-    - copy privet key in a Notepad for later use.
-    - This Should Happen Between Enterprise and each controllers Vise-Versa and for R-sync to not fail
+    - copy privet key in a Notepad for later use in the GUI steps.
+    - This Should Happen Between Enterprise and each controllers Vise-Versa and for R-sync to not fail.
     
-    ```ssh-keygen -t rsa```
-    ```ssh-copy-id <user>@<other-controller-ip>```
+    
+    ssh-keygen -t rsa
+    ssh-copy-id <user>@<other-controller-ip>
     
 
 
