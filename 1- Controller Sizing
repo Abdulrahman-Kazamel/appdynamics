@@ -1,0 +1,18 @@
+Controller Sizing:
+
+1- Identify the number of agents: Start by determining the number of agents you need to monitor your applications.
+Consider factors such as the number of instances and the size of each instance.
+
+2- Determine the size of your data: Consider the size of your data, including the amount of metric data,
+event data, and log data. AppDynamics supports up to 100GB of data per controller.
+
+3- Select the appropriate controller size: 
+Based on the number of agents and data size, select the appropriate controller size from the options provided by AppDynamics, 
+such as small, medium, and large.
+
+4- Monitor controller performance: Continuously monitor the performance of your controller and adjust the size as needed.
+You can use the AppDynamics Dashboards and Reports to view the performance metrics of your controller.
+
+
+You will find more at Appdynamics Docs
+https://docs.appdynamics.com/display/PRO44/Controller+System+Requirements#ControllerSystemRequirements-ControllerSizing
