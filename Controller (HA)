@@ -1,9 +1,15 @@
+
+
 1- Install two instances of the AppDynamics Controller, one as the Master and one as the Slave.
 
 2- Configure the database replicator for Master and Slave setup.
 
 3- Run the following command to activate the HA modules:
    ./bin/platform-admin.sh submit-job --service controller --job activate-ha-modules
+   
+   • Activate HA Module : You need to activate the HA Modules to ensure the EC is no longer going to
+     be in the path of the HA process. As part of the new EC design, EC no longer handle the failover
+     process.
 
 4- The Watchdog process runs on both the Master and the Slave Controller, 
    monitoring each other and automatically performing a failover if the other Controller goes down.
