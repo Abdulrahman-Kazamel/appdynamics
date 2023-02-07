@@ -1,0 +1,20 @@
+measure maximum write latency for the controller:
+
+1- Identify the mounted path where the AppDynamics controller is installed, e.g. /dev/mapper/centos-root.
+
+2- Run the iostat command to monitor disk I/O performance on the mounted path:
+    # nohup iostat -myxd <mount> 5 720 > /tmp/iostat.out 2>/tmp/iostat.err &
+    
+    In this example, the iostat command will run for 720 samples of 5-second intervals, monitoring the mounted path <mount>,
+    and saving the output in the file /tmp/iostat.out and error in /tmp/iostat.err. 
+    The nohup command is used to run the iostat command in the background, even if the terminal session is closed.
+    
+3- Monitor the write latency, indicated by the w_await metric, in the output of the iostat command:
+    # tail -f /tmp/iostat.err
+    In this example, the tail -f command is used to continuously monitor the /tmp/iostat.err file and show any updates in real-time. 
+    The w_await metric indicates the average time (in milliseconds) that it takes for a write operation to complete.
+    
+4- Compare the w_await metric to the desired maximum write latency of 3ms. If the w_await value is consistently higher than 3ms,
+    consider increasing the resources (e.g. disk I/O, memory) of the AppDynamics controller system to improve performance.
+    
+5- Continuously monitor the disk I/O performance of the AppDynamics controller system to ensure it meets the desired maximum write latency.
