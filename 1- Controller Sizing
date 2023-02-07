@@ -1,18 +1,28 @@
 Controller Sizing:
 
-1- Identify the number of agents: Start by determining the number of agents you need to monitor your applications.
-Consider factors such as the number of instances and the size of each instance.
 
-2- Determine the size of your data: Consider the size of your data, including the amount of metric data,
-event data, and log data. AppDynamics supports up to 100GB of data per controller.
+1- Monitor System Resources:
+    Check the available disk space with the command "df -h".
+    Check the available memory with the command "free -m".
+    Check the CPU utilization with the command "top".
+    Check the network bandwidth with the command "bmon".
 
-3- Select the appropriate controller size: 
-Based on the number of agents and data size, select the appropriate controller size from the options provided by AppDynamics, 
-such as small, medium, and large.
+2- Review the AppDynamics Controller log files for any error or warning messages related to sizing issues.
 
-4- Monitor controller performance: Continuously monitor the performance of your controller and adjust the size as needed.
-You can use the AppDynamics Dashboards and Reports to view the performance metrics of your controller.
+3- Consider increasing the Controller sizing if you see high utilization of disk space, memory, CPU, or network bandwidth.
 
+4- Get the count of nodes and metrics in the controller database:
 
-You will find more at Appdynamics Docs
-https://docs.appdynamics.com/display/PRO44/Controller+System+Requirements#ControllerSystemRequirements-ControllerSizing
+# cd /opt/appdynamics/platform/product/controller/bin
+# ./controller.sh login-db
+> select from_unixtime(ts_min*60), count(distinct(node_id)), count(*) from metricdata_min where ts_min > (select max(ts_min) - 10
+from metricdata_min) group by 1 order by 1;
+
+Based on the count of nodes and metrics, 
+determine the appropriate controller size (demo, small, medium, or large) and add 20-30k for EUM BRUM or mobile app increase.
+
+5- Continuously monitor the performance of your controller and adjust the size as needed. 
+   You can use the AppDynamics Dashboards and Reports to view the performance metrics of your controller.
+
+For more information, see the AppDynamics documentation at:
+https://docs.appdynamics.com/display/PRO44/Controller+System+Requirements#ControllerSystemRequirements-ControllerSizing.
