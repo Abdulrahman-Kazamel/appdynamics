@@ -1,7 +1,8 @@
 ## Controller Sizing:
 
 1- Monitor System Resources:
-    Check the available disk space with the command "df -h".
+    Check the available disk space with the command ```sh
+    df -h```.
     Check the available memory with the command "free -m".
     Check the CPU utilization with the command "top".
     Check the network bandwidth with the command "bmon".
