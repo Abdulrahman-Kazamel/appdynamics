@@ -10,8 +10,18 @@
    
 5- The Master Controller and the Slave Controller must be connected to a common database and data is synced between them using R-sync.
 
-It is important to note that AppDynamics HA only works in Active-Passive mode,
-with one Controller active at a time and two databases up, and moving data between them using R-sync. 
-The Slave Controller uses the Watchdog to always monitor the Master and perform a failover if it becomes unhealthy.
+
+You need to consider this: 
+
+   It is important to note that AppDynamics HA only works in Active-Passive mode,
+   with one Controller active at a time and two databases up, and moving data between them using R-sync. 
+   The Slave Controller uses the Watchdog to always monitor the Master and perform a failover if it becomes unhealthy.
+
+   • HA Servers should have identical OS, CPU, disk and Ram.
+   • Login shell must be bash (/bin/bash)
+   • Port 3388 must be opened between the controllers (this is for DB replication)
+   • Time Synchronization – Use NTP
+   • The two HA hosts must have identical writable paths managed by remote user
+   • HA Licenses for the secondary Controller
 
 
