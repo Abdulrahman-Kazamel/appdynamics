@@ -1,14 +1,10 @@
 ## Controller Sizing:
 
 1- Monitor System Resources:
-    Check the available disk space with the command ```sh
-    df -h```.
-    Check the available memory with the command ```sh
-    free -m ```.
-    Check the CPU utilization with the command ```sh
-    top```.
-    Check the network bandwidth with the command ```sh
-    bmon```.
+    Check the available disk space with the command ```df -h```.
+    Check the available memory with the command ```free -m```.
+    Check the CPU utilization with the command ```top```.
+    Check the network bandwidth with the command ```bmon```.
 
 2- Review the AppDynamics Controller log files for any error or warning messages related to sizing issues.
 
@@ -16,7 +12,7 @@
 
 4- Get the count of nodes and metrics in the controller database:
 
-```sh 
+```
 cd /opt/appdynamics/platform/product/controller/bin
 ./controller.sh login-db
 ```
