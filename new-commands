@@ -339,15 +339,7 @@ sudo ln -s /path/to/phantomjs /usr/local/bin/
 /opt/appdynamics/platform/product/controller/reporting_service/reports/node_modules/phantomjs-prebuilt/lib/phantom/bin/phantomjs
 **********************************************************************************************************************************************************************************************************************************************************************************************************************************************
 
-Machine Agent 
-cd /opt/appdynamics/machineagent/bin
 
-nohup ./machine-agent &
-
-ps -ef | grep machine
-
-in windows 
-java -jar machineagent.jar 
 
 
 **********************************************************************************************************************************************************************************************************************************************************************************************************************************************
@@ -377,9 +369,8 @@ traceroute <controllerHost>
 
 
 
-sudo fuser -k 80/tcp
 
-b0aa9bc5-e70c-4dd6-8efa-f9720454a11b
+
 
 
 
@@ -471,198 +462,31 @@ selfservice-free-account
 
 **********************************************************************************************************************************************************************************************************************************************************************************************************************************************
 
-sudo firewall-cmd --state
-sudo systemctl stop firewalld
-sudo systemctl disable firewalld
-sudo systemctl mask --now firewalld
-sudo systemctl status firewalld
-yum install iptables-services
-systemctl enable iptables
-
-iptables -A INPUT -p tcp -m tcp --dport 9080 -m conntrack --ctstate NEW -j ACCEPT
-iptables -A INPUT -p tcp -m tcp --dport 9081 -m conntrack --ctstate NEW -j ACCEPT
-iptables -A INPUT -p tcp -m tcp --dport 9300:9400 -m conntrack --ctstate NEW -j ACCEPT
-iptables-save
-
-iptables -I INPUT -p tcp --dport 80 -j ACCEPT
-
-iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport 9080 -j ACCEPT
-iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport 9081 -j ACCEPT
-iptables -A INPUT -m state --state NEW -m multiport -p tcp --dports 9300:9400 -j ACCEPT
-
-
-iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport 9080 -j ACCEPT
-iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport 9081 -j ACCEPT
-iptables -A INPUT -m state --state NEW -m multiport -p tcp --dports 9300:9400 -j ACCEPT
-
-iptables -A RH-Firewall-1-INPUT -m state --state NEW -m tcp -p tcp --dport 9080 -j ACCEPT
-iptables -A RH-Firewall-1-INPUT -m state --state NEW -m tcp -p tcp --dport 9080 -j ACCEPT
-
-sudo ufw allow 9080/tcp
-
-service iptables save
-netstat -anp | grep LISTEN | grep :9080
-firewall-cmd --zone=public --add-port=9080/tcp --permanent
-iptables -A IN_public_allow -p tcp -m tcp --dport 9080 -m conntrack --ctstate NEW -j ACCEPT
-
-
-iptables -A INPUT -m state --state NEW -p tcp --dport 9080 -j ACCEPT
-
-# firewall-cmd --permanent --add-port=22/tcp
-#firewall-cmd --permanent --add-service=http
-# firewall-cmd --reload
-OR
-$ sudo ufw allow 22/tcp
-$ sudo ufw reload 
-
-yum install -y epel-release
-yum install -y ufw
-
-sudo fuser -k 80/tcp
-sudo fuser -k 443/tcp
 sudo service nginx restart
 
 yum install sysstat
 mpstat
 mpstat -P ALL
 
-ssh-keygen
-ssh-keygen -t rsa -b 2048 -N '' -m pem
-ssh-copy-id root@10.0.30.44
 
 
 sudo pkill -f nginx & wait $!
 sudo systemctl start nginx
 
-# yum install policycoreutils-python-utils
-# yum install policycoreutils-python
 
 semanage port -a -t http_port_t -p tcp 9080
 semanage port -m -t http_port_t -p tcp 9080
 
 
 sudo vim /var/www/html/index.html
-
-
-
-
-
-
-
-http {
-          upstream events-service-api {
-   server 10.0.30.60:9080;
-   server 10.0.30.45:9080;
-   server 10.0.30.46:9080;
-   server 10.0.30.47:9080;
-   keepalive 15;
-}
-server {
-   listen 9080;
-   location / {
-      proxy_pass http://events-service-api;
-      proxy_http_version 1.1;
-      proxy_set_header Connection "Keep-Alive";
-      proxy_set_header Proxy-Connection "Keep-Alive";
-   }
-}
-}
-
-
-upstream events-service-api {
-  server 10.0.30.60:9080;
-   server 10.0.30.45:9080;
-   server 10.0.30.46:9080;
-   server 10.0.30.47:9080;
-   keepalive 15;
-}
-server {
-   listen 9080;
-   location / {
-      proxy_pass http://events-service-api;
-      proxy_http_version 1.1;
-      proxy_set_header Connection "Keep-Alive";
-      proxy_set_header Proxy-Connection "Keep-Alive";
-
-
-
-
-( 20/ 26) Load Events Service cluster configuration: SUCCESS
-( 21/ 26) Load all ES cluster hosts into execution context.: SUCCESS
-( 22/ 26) es_cluster_health_stage: FAILED
-Events Service installation failed.
-Failure occurred: es_cluster_health_stage
-Error message:
-Unable to check health of Events Service hosts [eventsservice, eventsservice-02, eventsservice-03] through port 9080.
-   }
-}
-
-
-Caused by: com.fasterxml.jackson.databind.exc.ValueInstantiationException: Cannot construct instance of `com.appdynamics.common.framework.version.CalendarVersion`, problem: 4.5.2.20651is not a valid calendar version
-
-
-
-
- [ERROR]  [main]  [c.a.common.framework.AbstractApp]  Severe error occurred while starting application [events-service-api-store]. Shutdown procedure will commence soon
-com.google.inject.ProvisionException: Unable to provision, see the following errors:
-
-1) Error in custom provider, java.lang.IllegalArgumentException: Service key not provided in any source.
-  at com.appdynamics.analytics.client.module.ServiceKeyProviderModule.provideServiceKey(ServiceKeyProviderModule.java:47)
-  at com.appdynamics.analytics.client.module.ServiceKeyProviderModule.provideServiceKey(ServiceKeyProviderModule.java:47)
-  while locating com.appdynamics.analytics.client.module.ServiceKey
-    for parameter 4 at com.appdynamics.analytics.processor.slm.resource.SlmResourceModule.createSlmConfigService(SlmResourceModule.java:57)
-  at com.appdynamics.analytics.processor.slm.resource.SlmResourceModule.createSlmConfigService(SlmResourceModule.java:57)
-  at com.appdynamics.analytics.processor.slm.resource.SlmResourceModule.createSlmConfigService(SlmResourceModule.java:57)
-  while locating com.appdynamics.analytics.processor.slm.service.performance.SlmPerfConfigService
-    for parameter 1 at com.appdynamics.analytics.processor.slm.resource.SlmResourceModule.onStart(SlmResourceModule.java:114)
-  while locating com.appdynamics.analytics.processor.slm.resource.SlmResourceModule
-Caused by: java.lang.IllegalArgumentException: Service key not provided in any source.
-        at com.appdynamics.analytics.client.module.ServiceKeyProviderModule.provideServiceKey(ServiceKeyProviderModule.java:49)
-        at com.appdynamics.analytics.client.module.ServiceKeyProviderModule$$FastClassByGuice$$2e553554.invoke(<generated>)
-        at com.google.inject.internal.ProviderMethod$FastClassProviderMethod.doProvision(ProviderMethod.java:272)
-        at com.google.inject.internal.ProviderMethod.get(ProviderMethod.java:172)
-
-
-
-
-
-java.lang.IllegalArgumentException: Service key not provided in any source
-
-
-
-
-
-
-
-
-
-
-
-workgroup = WORKGROUP
-server string = Samba Server %v
-netbios name = centos
-security = user
-map to guest = bad user
-dns proxy = no
 #============================ Share Definitions ============              
 
 
-20.13.32.50
-
  cd /opt/appdynamics/eum/eum-processor
  ./bin/provision-license /opt/appdynamics/platform/product/controller/license.lic
-timedatectl set-time 2020-11-04         
 
 
 
 
 
 Validating host and port connection information...
-Setup requires at least 3573430 KB of free space to install, but the selected drive only has 1450032 KB available.
-                                                                                                                        
-
-
-
-======================================================================================
-Check if the required data directories have sufficient space:
-You can modify property  controller_data_min_disk_space_in_mb in file controller-medium.groovy to lower value at /platform-admin/archives/controller/4.5/playbooks/controller                                                                                                
