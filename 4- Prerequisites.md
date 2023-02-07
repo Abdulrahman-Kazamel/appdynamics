@@ -48,7 +48,8 @@ root    hard    memlock         unlimited
     ssh-copy-id <user>@<other-controller-ip>
     
 
-
+9- Test connectivity by ```ssh hostname``` 
+or by ```ssh hostname "echo success"``` 
 
 
 
