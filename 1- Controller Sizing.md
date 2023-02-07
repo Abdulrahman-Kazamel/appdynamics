@@ -1,5 +1,4 @@
-Controller Sizing:
-
+## Controller Sizing:
 
 1- Monitor System Resources:
     Check the available disk space with the command "df -h".
