@@ -15,9 +15,6 @@ DB Data Directory
 /opt/appdynamics/platform/product/controller/db/data
 
 
-/usr/local/apache/apache-tomcat-7/bin/shutdown.sh
-/usr/local/apache/apache-tomcat-7/bin/startup.sh
-
 
 **********************************************************************************************************************************************************************************************************************************************************************************************************************************************
 
@@ -79,41 +76,6 @@ changed either via Enterprise console (CLI or GUI) or Glassfish domain.xml file 
 
 the same from Enterprise GUI configration tab ExternalUrl
 ==============================================================================================================================================
-
-
-
-
-
-
-sudo apt-get install openjdk-8-jdk
-/usr/lib/jvm/java-1.8.0-openjdk-amd64/bin/java
-
-
-echo $JAVA_HOME
-
-
-
-export JAVA_HOME=/usr/lib/jvm/jre-1.8.0-openjdk-1.8.0.292.b10-1.el7_9.x86_64/bin/java 
-export JAVA_HOME="export JAVA_HOME=/usr/lib/jvm/jre-1.8.0-openjdk-1.8.0.292.b10-1.el7_9.x86_64/bin/java"
-export PATH=$JAVA_HOME/bin:$PATH
-
-
-check java path right
-
-port 9080 ,,and host adding 
-
-
-export CLASSPATH=.:$JAVA_HOME/jre/lib:$JAVA_HOME/lib:$JAVA_HOME/lib/tools.jar
-
-
-/usr/lib/jvm/jre-1.8.0-openjdk-1.8.0.292.b10-1.el7_9.x86_64/bin/jar -xvf Supercar-Trader.war  
-
-/usr/lib/jvm/jre-1.8.0-openjdk-1.8.0.282.b08-1.el7_9.x86_64/bin/java
-export PATH=$PATH:$JAVA_HOME/bin
-
-sudo update-alternatives --set java /usr/lib/jvm/jdk1.8.0_version/bin/java
-
-**********************************************************************************************************************************************************************************************************************************************************************************************************************************************
 https://docs.appdynamics.com/21.5/en/application-performance-monitoring-platform/events-service-deployment/install-the-events-service-on-windows
 
 
@@ -205,8 +167,6 @@ bin/platform-admin.sh install-events-service --profile Prod --hosts 10.0.30.43 -
 
 
 
-
-
  "" ./bin/platform-admin.sh submit-job --service events-service --job install --args serviceActionHost=10.0.30.45 profile=Prod ""
 
 
@@ -295,28 +255,8 @@ sudo netstat -tulpn | grep LISTEN
 sudo ln -s /path/to/phantomjs /usr/local/bin/
 
 /opt/appdynamics/platform/product/controller/reporting_service/reports/node_modules/phantomjs-prebuilt/lib/phantom/bin/phantomjs
-**********************************************************************************************************************************************************************************************************************************************************************************************************************************************
 
 
-
-
-**********************************************************************************************************************************************************************************************************************************************************************************************************************************************
-
-
-
-Database Agent
-
-cd /opt/appdynamics/dbagent
-nohup java -Dappdynamics.agent.maxMetrics=300000 -Ddbagent.name=DBMon-Lab-Agent -jar db-agent.jar &
-
-java -Xmx1536m -jar <db_agent_home>/db-agent.jar 
-ps -ef | grep db-agent
-
-
-
-
-
-**********************************************************************************************************************************************************************************************************************************************************************************************************************************************
 
 
 command you can use to test connectivity?
@@ -369,25 +309,7 @@ https://github.com/sherifadel90/AppDynamicsPlatformInstallation
 
 export CATALINA_OPTS="$CATALINA_OPTS -javaagent:/opt/appdynamics/javaagent/javaagent.jar"
 
-**********************************************************************************************************************************************************************************************************************************************************************************************************************************************
 
-
-upstream events-service-api {
-   
-   server 10.0.30.45:9080;
-   server 10.0.30.46:9080;
-   server 10.0.30.47:9080;
-   keepalive 15;
-}
-server {
-   listen 9080;
-   location / {
-      proxy_pass http://events-service-api;
-      proxy_http_version 1.1;
-      proxy_set_header Connection "Keep-Alive";
-      proxy_set_header Proxy-Connection "Keep-Alive";
-   }
-}
 semanage port -a -t http_port_t -p tcp 9080
 firewall-cmd --permanent --add-port=9080/tcp
 firewall-cmd --reload
@@ -418,10 +340,6 @@ selfservice-free-account
 
 
 
-**********************************************************************************************************************************************************************************************************************************************************************************************************************************************
-
-sudo service nginx restart
-
 yum install sysstat
 mpstat
 mpstat -P ALL
@@ -444,6 +362,16 @@ sudo vim /var/www/html/index.html
  ./bin/provision-license /opt/appdynamics/platform/product/controller/license.lic
 
 
+
+
+
+Database Agent
+
+cd /opt/appdynamics/dbagent
+nohup java -Dappdynamics.agent.maxMetrics=300000 -Ddbagent.name=DBMon-Lab-Agent -jar db-agent.jar &
+
+java -Xmx1536m -jar <db_agent_home>/db-agent.jar 
+ps -ef | grep db-agent
 
 
 
