@@ -5,17 +5,6 @@ continue from the Enterprise Console GUI  to install custom controller  =====by 
 nmtui
 du -sh filename (to get size )
 
-Install Java
-sudo groupadd tomcat
-sudo useradd -s /bin/false -g tomcat -d /opt/tomcat tomcat
-cd /tmp
-curl -O https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.63/bin/apache-tomcat-9.0.63.tar.gz
-
-&nbsp;  &nbsp;  &nbsp;
-https://196.202.19.58:10443/ts
-https://41.64.70.66:10443/ts
-
-adding host
 matrix for controller sizing 
 
 
@@ -31,10 +20,6 @@ DB Data Directory
 
 
 **********************************************************************************************************************************************************************************************************************************************************************************************************************************************
- sudo apt-get install libaio1
- sudo apt-get install numactl
- sudo apt-get install tzdata
- sudo apt-get install libncurses5
 
 https://www.99ideas.in/blog-post/increasing-file-descriptors-and-open-files-limit-in-centos-7/
 
@@ -47,20 +32,6 @@ com.appdynamics.orcha.core.exceptions.OrchaRunnerException: Error running playbo
 
 **********************************************************************************************************************************************************************************************************************************************************************************************************************************************
 
- cd /opt/appdynamics/platform/platform-admin
-
-bin/platform-admin.sh login -u admin -p AppD123
-bin/platform-admin.sh stop-platform-admin
-
-
-bin/platform-admin.sh start-platform-admin
-bin/platform-admin.sh start-controller-db
-
-bin/platform-admin.sh start-controller-appserver
- 
-netstat -ntlp |grep -i 9191
- curl 127.0.0.1:9191
- 
 *****************************************************Enterprise Console Database**************************************************************************************
 #cd /opt/appdynamics/platform/mysql/
 # ./bin/mysql -u root -p 
@@ -88,19 +59,6 @@ exit
 
 #./bin/startcontroller.sh ==>starting both contoller glassfish server and the db together
 #./bin/controller.sh start-appserver or start-db   ==> starts each one alone
-
-**************************************************************************************************
-=========================================================================================================
-Managing Controller Environment –///// Monitoring Appdynamics itself/////////
-You can use an AppDynamics internal java agent deployed automatically during controller installation to monitor your
-controllers. The agent location is <controller_home>/appserver/glassfish/domains/domain1/appagent
-Everything is setup for you and just need to access it.
-You can assess the self monitoring URL via
-http://<controller_host>:8090/controller?enableAccounts=true and Login with
-Account : system
-Username: root
-Password: <password>
-
 
 **************************************************************************************************
 =================================================================================================
