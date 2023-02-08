@@ -15,8 +15,10 @@
 5- Enterprise Console database:
 
  - Change to the mysql directory using `cd /opt/appdynamics/platform/mysql/`.
+ - Error : 2002 (HY000): Can't connect to local MySQL through socket '/tmp/mysql.sock' (2)
  - Connect to the database using ``./bin/mysql -u root -p --socket=<platform_admin_home>/mysql/mysql.sock --port=3377 ``
-   (replace the socket path and port with the appropriate values).
+   (replace the socket path and port with the appropriate values). and 
+   ``ps -ef | grep mysql`` ===> from the output grep the --socket with one with port that I need
  - To show the databases, run ` show databases`.
  - To use a specific database, `run use platform_admin`.
  - To show tables, run `show tables`.
@@ -34,30 +36,18 @@
  ./bin/startcontroller.sh
  ```
  To start each component alone, run ``./bin/controller.sh start-appserver`` or ``./bin/controller.sh start-db``
-
-
-https://www.99ideas.in/blog-post/increasing-file-descriptors-and-open-files-limit-in-centos-7/
+ 
+ 8- Controller as a service to start automatically.
+```
+cd /opt/appdynamics/platform/products/controller/controller-ha/
+./set_mysql_password_file.sh -p password
+./init/install-init.sh
+```
 
 ==============================Error for the below ===============================================
 com.appdynamics.orcha.core.exceptions.OrchaRunnerException: Error running playbook at com.appdynamics.orcha.core.OrchaRunnerImpl.runPlaybook(OrchaRunnerImpl.java:220)
 
-Error : 2002 (HY000): Can't connect to local MySQL through socket '/tmp/mysql.sock' (2)
-
-#ps -ef | grep mysql ===> from the output grep the --socket with one with port that I need
-## ./bin/mysql -u root -p --socket=<platform_admin_home>/mysql/mysql.sock --port=3377
-
-
-**************************************************************************************************
-=================================================================================================
--------Controller as a service to start automatically.-------------------
-#cd /opt/appdynamics/platform/products/controller/controller-ha/
-#./set_mysql_password_file.sh -p password
-#./init/install-init.sh
-
-
-**************************************************************************************************
 =============================================================================================
-
 Managing Controller Environment – Controller Deep Link
 Deep link are embedded links you see in alerts and are configured to be external URL access to the controller. Deep link can be
 changed either via Enterprise console (CLI or GUI) or Glassfish domain.xml file for older controller versions.
@@ -66,14 +56,9 @@ changed either via Enterprise console (CLI or GUI) or Glassfish domain.xml file 
 
 the same from Enterprise GUI configration tab ExternalUrl
 ==============================================================================================================================================
-https://docs.appdynamics.com/21.5/en/application-performance-monitoring-platform/events-service-deployment/install-the-events-service-on-windows
-
 
 bin/platform-admin.sh add-credential --credential-name eventsservice-01 --type ssh --user-name root --ssh-key-file /root/.ssh/appd-analytics.pem
 bin/platform-admin.sh add-credential --credential-name 10.0.30.45 --type ssh --user-name root --ssh-key-file /root/.ssh/appd-analytics.pem
-
-
-
 
 
 bin/platform-admin.sh add-hosts --host-file <file path to host file> --credential <credential name> 
@@ -81,9 +66,6 @@ bin/platform-admin.sh add-hosts --host-file <file path to host file> --credentia
 /opt/appdynamics/platform/product/controller/db/data
 
 bin/platform-admin.sh remove-dead-hosts --hosts <host name>
-
-
-
 
 ./bin/platform-admin.sh add-hosts --hosts eventsservice --credential "Events Service" --platform-name AppDPlatform
 ./bin/platform-admin.sh add-hosts --hosts eventsservice-01 --credential eventsservice-01 --platform-name AppDPlatform
@@ -234,12 +216,6 @@ ps -ef | grep -i eum | grep -v grep
 
 
 
-Java Agent instillation 
-
-cd /usr/local/apache/apache-tomcat-7/bin
-export CATALINA_OPTS="$CATALINA_OPTS -javaagent:/opt/appdynamics/javaagent/javaagent.jar"
-
-
 sudo netstat -tulpn | grep LISTEN
 
 sudo ln -s /path/to/phantomjs /usr/local/bin/
@@ -260,20 +236,12 @@ traceroute <controllerHost>
 
 
 
-
-
-
-
 Uncheck all the boxes on Web Service.
 Scroll down to find the Servlet settings.
 Check the box Enable Servlet Filter Detection (all three boxes should be checked on Servlet settings).
 
 Select the Call Graph Settings tab from the Instrumentation window.
 Scroll down until you see the SQL Capture Settings.
-
-
-
-
 
 
 
@@ -297,13 +265,8 @@ bin/platform-admin.sh submit-job --platform-name AppDPlatform --service events-s
 http://192.168.174.129:8090/controller
 https://github.com/sherifadel90/AppDynamicsPlatformInstallation
 
-export CATALINA_OPTS="$CATALINA_OPTS -javaagent:/opt/appdynamics/javaagent/javaagent.jar"
 
 
-semanage port -a -t http_port_t -p tcp 9080
-firewall-cmd --permanent --add-port=9080/tcp
-firewall-cmd --reload
-systemctl restart nginx.service
 ################################################################################
 keytool -import -trustcacerts -v -alias events_service -file /path/to/CA-cert.txt -keystore cacerts.jks
 
@@ -328,29 +291,10 @@ https://community.appdynamics.com/t5/Controller-SaaS-On-Premise/Controller-insta
 
 selfservice-free-account 
 
-
-
-yum install sysstat
-mpstat
-mpstat -P ALL
-
-
-
-sudo pkill -f nginx & wait $!
-sudo systemctl start nginx
-
-
-semanage port -a -t http_port_t -p tcp 9080
-semanage port -m -t http_port_t -p tcp 9080
-
-
-sudo vim /var/www/html/index.html
 #============================ Share Definitions ============              
 
 
  cd /opt/appdynamics/eum/eum-processor
  ./bin/provision-license /opt/appdynamics/platform/product/controller/license.lic
-
-
 
 Validating host and port connection information...
