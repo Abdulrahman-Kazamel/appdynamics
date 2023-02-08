@@ -51,6 +51,14 @@ root    hard    memlock         unlimited
 9- Test connectivity by ```ssh hostname``` 
 or by ```ssh hostname "echo success"``` 
 
+10- in centos Server these are important packages
+```
+ sudo apt-get install libaio1
+ sudo apt-get install numactl
+ sudo apt-get install tzdata
+ sudo apt-get install libncurses5
+```
+
 
 
 
