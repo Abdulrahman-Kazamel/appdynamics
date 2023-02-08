@@ -1,61 +1,51 @@
-=================================================================================
-continue from the Enterprise Console GUI  to install custom controller  =====by adding Enterprise console privetkey we put on the NotePad
-#tail -f /opt/appdynamics/platform/platform-admin/logs/platform-admin-server.log
+1- Check logs for Enterprise Console
+```tail -f /opt/appdynamics/platform/platform-admin/logs/platform-admin-server.log```
 
-nmtui
-du -sh filename (to get size )
+2- Get the size of a file, run ``du -sh filename``.
 
-matrix for controller sizing 
-
-
+3- The matrix for controller sizing can be found in the playbook directory 
+```
 /opt/appdynamics/platform/platform-admin/archives/controller/20.11.1-1963/playbooks
+```
 
-
-DB Data Directory
+4- The data directory for the controller's database is 
+```
 /opt/appdynamics/platform/product/controller/db/data
+```
+5- Enterprise Console database:
 
+ - Change to the mysql directory using `cd /opt/appdynamics/platform/mysql/`.
+ - Connect to the database using ``./bin/mysql -u root -p --socket=<platform_admin_home>/mysql/mysql.sock --port=3377 ``
+   (replace the socket path and port with the appropriate values).
+ - To show the databases, run ` show databases`.
+ - To use a specific database, `run use platform_admin`.
+ - To show tables, run `show tables`.
+ 
+6- Controller database:
 
+ - Change to the controller directory using `` cd opt/appdynamics/platform/product/controller/``.
+ - Connect to the database using ``./bin/controller.sh login-db``
+ - To show the databases, run ``show databases``.
+ - To use a specific database, run ``use controller``.
+ - To show tables, run `show tables`.
+ 
+ 7- To start the controller and glassfish server together, run 
+ ```
+ ./bin/startcontroller.sh
+ ```
+ To start each component alone, run ``./bin/controller.sh start-appserver`` or ``./bin/controller.sh start-db``
 
-**********************************************************************************************************************************************************************************************************************************************************************************************************************************************
 
 https://www.99ideas.in/blog-post/increasing-file-descriptors-and-open-files-limit-in-centos-7/
 
 ==============================Error for the below ===============================================
 com.appdynamics.orcha.core.exceptions.OrchaRunnerException: Error running playbook at com.appdynamics.orcha.core.OrchaRunnerImpl.runPlaybook(OrchaRunnerImpl.java:220)
-=======================================================================================================
-
-
-
-
-**********************************************************************************************************************************************************************************************************************************************************************************************************************************************
-
-*****************************************************Enterprise Console Database**************************************************************************************
-#cd /opt/appdynamics/platform/mysql/
-# ./bin/mysql -u root -p 
-# ./bin/mysql -u root -p --socket=<platform_admin_home>/mysql/mysql.sock --port=3377
 
 Error : 2002 (HY000): Can't connect to local MySQL through socket '/tmp/mysql.sock' (2)
 
 #ps -ef | grep mysql ===> from the output grep the --socket with one with port that I need
 ## ./bin/mysql -u root -p --socket=<platform_admin_home>/mysql/mysql.sock --port=3377
 
-
-mysql> show databases;
-mysql> use platform_admin;
-mysql>show tables;
-exit
-
-*********************************************************************
-For the Controller DB: 
-#cd opt/appdynamics/platform/product/controller/
-#./bin/controller.sh login-db
-mysql> show databases;
-mysql> use controller;
-mysql>show tables;
-exit
-
-#./bin/startcontroller.sh ==>starting both contoller glassfish server and the db together
-#./bin/controller.sh start-appserver or start-db   ==> starts each one alone
 
 **************************************************************************************************
 =================================================================================================
@@ -160,7 +150,7 @@ bin/events-service.sh --service events-service --job install -p conf\events-serv
 
 
 
-**********************************************************************************************************************************************************************************************************************************************************************************************************************************************
+===================================================================
 
 bin/platform-admin.sh install-events-service --profile prod --hosts <Event_Node_IP> --data-dir “/home/dgisvcdyn/appdynamics” --platform-name DHFLGI-APPD
 bin/platform-admin.sh install-events-service --profile Prod --hosts 10.0.30.43 --data-dir “/opt/appdynamics/eventsservice” --platform-name AppDPlatform
@@ -196,7 +186,7 @@ Database Port: 3377 (default)
 Enable Https Connection: n
 Enterprise Console Port: 9191 (default)
 
-**********************************************************************************************************************************************************************************************************************************************************************************************************************************************
+========================================================
 cd /opt/appdynamics/eum/eum-processor/
 bin/eum.sh stop
 ps -ef | grep -i eum | grep -v grep (no process should be listed)
@@ -243,7 +233,7 @@ analytics.accountAccessKey=[eum_key] (the one collected in step 2)
 ps -ef | grep -i eum | grep -v grep
 
 
-**********************************************************************************************************************************************************************************************************************************************************************************************************************************************
+
 Java Agent instillation 
 
 cd /usr/local/apache/apache-tomcat-7/bin
@@ -319,7 +309,7 @@ keytool -import -trustcacerts -v -alias events_service -file /path/to/CA-cert.tx
 
 
 
-**********************************************************************************************************************************************************************************************************************************************************************************************************************************************
+
  Enable the file descriptor and process limits as follows: 
 Open the following file for editing: /etc/pam.d/common-session inside login file
 
@@ -360,18 +350,6 @@ sudo vim /var/www/html/index.html
 
  cd /opt/appdynamics/eum/eum-processor
  ./bin/provision-license /opt/appdynamics/platform/product/controller/license.lic
-
-
-
-
-
-Database Agent
-
-cd /opt/appdynamics/dbagent
-nohup java -Dappdynamics.agent.maxMetrics=300000 -Ddbagent.name=DBMon-Lab-Agent -jar db-agent.jar &
-
-java -Xmx1536m -jar <db_agent_home>/db-agent.jar 
-ps -ef | grep db-agent
 
 
 
