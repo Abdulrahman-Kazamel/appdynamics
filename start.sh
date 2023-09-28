@@ -13,6 +13,11 @@ bin/platform-admin.sh start-controller-db
 
 bin/platform-admin.sh stop-controller-appserver
 bin/platform-admin.sh start-controller-appserver
+
+
+ bin/platform-admin.sh submit-job --platform-name AppDPlatform --service events-service --job start
+ cd /opt/appdynamics/eum/eum-processor/
+ bin/eum.sh start
  
 netstat -ntlp |grep -i 9191
  curl 127.0.0.1:9191
