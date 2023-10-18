@@ -1,0 +1,15 @@
+sometimes phantomjs load not working probarely and this back to phantom package not installed 
+`sudo yum install glibc fontconfig freetype freetype-devel fontconfig-devel wget bzip2 -y`
+`wget https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2`
+`tar xvjf phantomjs-2.1.1-linux-x86_64.tar.bz2 -C /usr/local/share/`
+`ln -sf /usr/local/share/phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/local/bin`
+`phantomjs --version` to check version
+
+this resourse of installaion refrense to https://www.liquidweb.com/kb/how-to-install-phantomjs-on-centos-7/
+
+then back to 
+`chmod 754 /opt/appdynamics/DevNet-Labs/applications/Load-Generator/phantomjs/*.sh
+
+cd /opt/appdynamics/DevNet-Labs/applications/Load-Generator/phantomjs
+
+./start_load.sh`
