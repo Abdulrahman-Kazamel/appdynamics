@@ -29,5 +29,16 @@ Change to the /applications/Supercar-Trader/ directory and then execute the foll
 
 
  `mvn install`
- 
 This should run and leave "Supercar-Trader.war" in the "target/" directory
+
+# deploy the new application created by "mvn install" command in the Tomcat manager App
+"/opt/appdynamics/DevNet-Labs/applications/Supercar-Trader/target/Supercar-Trader.war"
+
+# A very important thing is to set the Supercar-Trader MySQL root password to "Welcome1!"
+`cd /opt/appdynamics/DevNet-Labs/applications/Supercar-Trader/src/main/resources/db`
+
+`mysql -u root -pWelcome1! < mysql-01.sql
+ mysql -u root -pWelcome1! < mysql-02.sql
+ mysql -u root -pWelcome1! < mysql-03.sql`
+
+# reboot your server 
