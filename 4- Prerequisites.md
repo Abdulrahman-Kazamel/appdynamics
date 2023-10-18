@@ -53,10 +53,12 @@ or by ```ssh hostname "echo success"```
 
 10- in centos Server these are important packages
 ```
- sudo apt-get install libaio1
- sudo apt-get install numactl
- sudo apt-get install tzdata
- sudo apt-get install libncurses5
+ sudo yum install libaio1 -y
+ sudo yum install numactl -y
+ sudo yum install tzdata -y
+ sudo yum install libncurses5 -y
+ sudo yum install glibc -y
+
 ```
 
 
