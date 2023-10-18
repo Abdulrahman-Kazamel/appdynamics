@@ -19,6 +19,3 @@ bin/platform-admin.sh start-controller-appserver
  cd /opt/appdynamics/eum/eum-processor/
  bin/eum.sh start
  
-netstat -ntlp |grep -i 9191
- curl 127.0.0.1:9191
- 
