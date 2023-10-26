@@ -1,10 +1,10 @@
 ## Machine Agent on Linux:
 ```
 # Change to the machine agent bin directory
-cd /opt/appdynamics/machineagent/bin
+cd /opt/appdynamics/machineagent/
 
 # Start the machine agent in the background
-nohup ./machine-agent &
+java -jar machineagent.jar 
 
 # Verify that the machine agent is running
 ps -ef | grep machine
