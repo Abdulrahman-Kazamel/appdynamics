@@ -58,6 +58,8 @@ or by ```ssh hostname "echo success"```
  sudo yum install tzdata -y
  sudo yum install libncurses5 -y
  sudo yum install glibc -y
+ sudo yum install curl -y
+ sudo yum install netstat -y
 
 ```
 
