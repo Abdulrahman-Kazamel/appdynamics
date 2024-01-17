@@ -295,6 +295,7 @@ bin/platform-admin.sh add-hosts --host-file <file path to host file> --credentia
 /opt/appdynamics/platform/product/controller/db/data
 
 bin/platform-admin.sh remove-dead-hosts --hosts <host name>
+bin/platform-admin.sh remove-dead-hosts --hosts events-21
 
 
 
