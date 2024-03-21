@@ -1,22 +1,24 @@
-**EUM Database**
 
-Tuesday, March 12, 2024
-
-12:39 PM
-
- 
-
+```bash
 cd \[EUM_HOME\]/mysql
-
 bin/mysql -u root -p \--port 3388 \--socket mysql.sock
+```
 
+```mysql
 USE eum_db;
 
 SELECT \* FROM account_credential \\G;
 
 SELECT \* FROM accounts \\G;
+```
 
- 
+### Backup EUM Database
+
+ ```bash
+cd \[EUM_HOME\]\\mysql
+
+./mysqldump -u root \--password \--protocol=TCP -P 3388 \--databases eum_db \--add-drop-database \> eum_db_bkup.sql
+```
 
 
  

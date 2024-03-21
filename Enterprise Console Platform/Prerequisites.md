@@ -11,10 +11,11 @@ Before setting up AppDynamics, it is important to validate and configure the fol
 ulimit -S -n
 ulimit -H -u
 ```
-and by editig
+
 ```
 vim /etc/security/limits.d/appdynamics.conf
 ```
+
 ```
 root     soft    nofile          96000
 root     hard    nofile          96000

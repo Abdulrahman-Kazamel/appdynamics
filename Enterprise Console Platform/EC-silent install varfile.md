@@ -1,4 +1,6 @@
+*edit the below and save it into ec.varfile*
 
+```bash
 serverHostName=HOST_NAME\
 sys.languageId=en\
 disableEULA=true
@@ -11,21 +13,10 @@ platformAdmin.databaseRootPassword=ENTER_PASSWORD\
 platformAdmin.adminPassword=ENTER_PASSWORD\
 platformAdmin.useHttps\$Boolean=false\
 sys.installationDir=/opt/appdynamics/platform
-
+```
  
+```bash
+./platform-setup-64bit-linux.sh -q -varfile \~/ec.varfile
+```
 
-*From \<<https://docs.appdynamics.com/appd/onprem/latest/en/enterprise-console/install-the-enterprise-console>\>*
-
- 
-
- 
-
-./platform-setup-64bit-linux.sh -q -varfile \~/response.varfile
-
- 
-
-*From \<<https://docs.appdynamics.com/appd/onprem/latest/en/enterprise-console/install-the-enterprise-console>\>*
-
- 
-
- 
+*From \<https://docs.appdynamics.com/appd/onprem/24.x/latest/en/enterprise-console/install-the-enterprise-console>*

@@ -1,8 +1,4 @@
  
-[appd@ec platform-admin]$ bin-platform-admin.sh start-platform-admin
-
-\[appd@ec platform-admin\]\$ bin/platform-admin.sh start-platform-admin
-
 
 ##I need to check the below again because i have created the platform first under /opt
 so normal user dosn't have permission on it 

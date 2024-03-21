@@ -46,33 +46,20 @@ server {
     listen 9081;                                                                                                                                                         
 
     location / {                                                                                                                                                         
-
-        proxy_pass http://events-service-api-health;                                                                                                                     
-
-        proxy_http_version 1.1;                                                                                                                                          
-
-        proxy_set_header Connection "Keep-Alive";                                                                                                                        
-
-        proxy_set_header Proxy-Connection "Keep-Alive";                                                                                                                  
-
-    }                                                                                                                                                                    
-
+        proxy_pass http://events-service-api-health;  
+        proxy_http_version 1.1;                                                                       
+        proxy_set_header Connection "Keep-Alive";                                                     
+        proxy_set_header Proxy-Connection "Keep-Alive";                                                
+    }                                                                                                 
 }                                                                                                                                                                        
-
-# Server block for events-service-api-transfer on port 9200                                                                                                              
-
+# Server block for events-service-api-transfer on port 9200                                                                                                            
 server {                                                                                                                                                                 
-
-    listen 9200;                                                                                                                                                         
-
+    listen 9200;                                                                                                                                                        
     location / {                                                                                                                                                         
 
-        proxy_pass http://events-service-api-trans;                                                                                                                      
-
-        proxy_http_version 1.1;                                                                                                                                          
-
-        proxy_set_header Connection "Keep-Alive";                                                                                                                        
-
+        proxy_pass http://events-service-api-trans;                                                   
+        proxy_http_version 1.1;                                                                       
+        proxy_set_header Connection "Keep-Alive";                                                     
         proxy_set_header Proxy-Connection "Keep-Alive";                                                                                                                  
 
     }                                                                                                                                                                    

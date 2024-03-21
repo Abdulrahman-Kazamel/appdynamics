@@ -1,9 +1,8 @@
 
-#!/bin/bash
-
-#this Script to be run in demo Environment for starting and stopping EC and the controller
+### this Script to be run in demo Environment for starting and stopping EC and the controller
 
 ```bash
+#!/bin/bash
 cd /opt/appdynamics/platform/platform-admin
 
 bin/platform-admin.sh stop-platform-admin
