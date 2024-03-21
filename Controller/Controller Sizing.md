@@ -29,3 +29,36 @@ determine the appropriate controller size (demo, small, medium, or large) and ad
 
 For more information, see the AppDynamics documentation at:[here](
 https://docs.appdynamics.com/display/PRO44/Controller+System+Requirements#ControllerSystemRequirements-ControllerSizing).
+
+
+ The matrix for controller sizing can be found in the playbook directory 
+```
+/opt/appdynamics/platform/platform-admin/archives/controller/20.11.1-1963/playbooks
+```
+
+ The data directory for the controller's database is 
+ 
+```
+/opt/appdynamics/platform/product/controller/db/data
+```
+
+ Controller database:
+
+ - Change to the controller directory using `` cd opt/appdynamics/platform/product/controller/``.
+ - Connect to the database using ``./bin/controller.sh login-db``
+ - To show the databases, run ``show databases``.
+ - To use a specific database, run ``use controller``.
+ - To show tables, run `show tables`.
+ 
+  To start the controller and glassfish server together, run 
+ ```
+ ./bin/startcontroller.sh
+ ```
+ To start each component alone, run ``./bin/controller.sh start-appserver`` or ``./bin/controller.sh start-db``
+ 
+ Controller as a service to start automatically.
+```
+cd /opt/appdynamics/platform/products/controller/controller-ha/
+./set_mysql_password_file.sh -p password
+./init/install-init.sh
+```

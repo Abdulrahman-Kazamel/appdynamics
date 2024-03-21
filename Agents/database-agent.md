@@ -1,4 +1,4 @@
-# Change directory to where the AppDynamics Database Agent is located
+**Change directory to where the AppDynamics Database Agent is located**
 ```
 cd /opt/appdynamics/dbagent
 ```

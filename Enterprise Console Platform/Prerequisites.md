@@ -1,4 +1,3 @@
-## Validation and Configuration of Prerequisites for AppDynamics
 Before setting up AppDynamics, it is important to validate and configure the following prerequisites on each host in the environment.
 
 1- Enable Reverse Host Lookups:

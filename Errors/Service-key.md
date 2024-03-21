@@ -1,6 +1,7 @@
 
 ## ERROR
 
+```
 ( 20/ 26) Load Events Service cluster configuration: SUCCESS
 ( 21/ 26) Load all ES cluster hosts into execution context.: SUCCESS
 ( 22/ 26) es_cluster_health_stage: FAILED
@@ -41,9 +42,10 @@ Caused by: java.lang.IllegalArgumentException: Service key not provided in any s
 
 
 java.lang.IllegalArgumentException: Service key not provided in any source
+```
   
   
-  ##  Soltion
+  # Soltion
    I don't remeber for now as this is old but I remember to check everything and contact me  and this might be becauce 
    Events Service is unable to start due to a missing service key.
    The "Service key not provided in any source" error message indicates that the required key for accessing the service is not present. 
