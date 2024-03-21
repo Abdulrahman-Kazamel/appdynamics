@@ -46,8 +46,6 @@ exit;
 
  
 
-*From \<<https://help.appdynamics.com/hc/en-us/requests/372470>\>*
-
  
 
  
