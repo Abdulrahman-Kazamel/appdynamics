@@ -5,7 +5,9 @@ Whether you’re setting up a Demo AppDynamics environment or troubleshooting is
 this repository has almost got you covered. 🌟
 
 ### Getting Started 🎉
-Prerequisites: Before diving in, make sure to follow the steps outlined in ### Sherif Medhat’s Repository.
+Prerequisites: Before diving in, make sure to follow the steps outlined in 
+### Sherif Medhat’s Repository.
+
 Sherif’s guide will help you build a solid foundation for your AppDynamics setup. 🛠️
 
 ### Purpose of This Repo:
