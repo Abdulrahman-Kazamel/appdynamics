@@ -13,6 +13,11 @@
 ./platform-admin.sh add-hosts --hosts <platformadmin>  ==> name of platformadin
 ```
 
+restart specific host
+```bash
+bin/platform-admin.sh submit-job --platform-name AppDPlatform --service events-service --job restart-node --args nodeActionHost=10.0.xx.xx
+```
+
 *4- remove-dead-hosts*
 ```bash
 bin/platform-admin.sh remove-dead-hosts --hosts <host name>
@@ -92,3 +97,5 @@ chmod +x tune-system.sh
 ```shell
 tail -f /opt/appdynamics/platform/platform-admin/logs/platform-admin-server.log
 ```
+
+

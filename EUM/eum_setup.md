@@ -1,7 +1,17 @@
 ```bash
+http://[your-ip-address]:7001/eumaggregator/ping
+
 cd /opt/appdynamics/eum/eum-processor/
 bin/eum.sh stop
 ps -ef | grep -i eum | grep -v grep (no process should be listed)
+
+vim eum.properties
+
+## edit these values
+analytics.enabled=true
+analytics.serverHost=[your-ip-address] #That should be the Events Server IP Address
+analytics.accountAccessKey=[eum_key] (the one collected in controller Admin jsp)
+
 bin/eum.sh start
 ps -ef | grep -i eum | grep -v grep (one process should be listed)
 ```
@@ -18,13 +28,11 @@ eum.mobile.screenshot.host = [your-ip-address]:7001 #That should be the EUM Serv
 
 
 
- 
 *From \<<https://community.appdynamics.com/t5/Business-iQ-Analytics/Analytic-service-is-unavailable/m-p/29716>\>*
 *From \<<https://community.appdynamics.com/t5/Business-iQ-Analytics/Analytic-service-is-unavailable/m-p/29716>\>*
 *From \<<https://github.com/sherifadel90/AppDynamicsPlatformInstallation>\>*
 
- 
-bin/mysqld_safe \--defaults-file=/opt/appdynamics/eum/mysql/db.cnf
+
 
  
 ### eum var file
