@@ -13,6 +13,7 @@ Sherif’s guide will help you build a solid foundation for your AppDynamics set
 
 ### Purpose of This Repo:
 Additions: Use this repository to contribute additional content related to AppDynamics. 📝
+
 Issue Solving: If you encounter any challenges during your labs, refer to this repo for solutions. 🚧
 
 ### Stay Connected 📬
