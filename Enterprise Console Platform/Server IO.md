@@ -21,6 +21,7 @@ Monitor the write latency, indicated by the `w_await` metric, in the output of t
 ```bash
    # Continuously monitor the iostat error file
    tail -f /tmp/iostat.err
+   #run this command for 1 hour and keep an eye on w-await
 ```
 
 *This command continuously monitors the `/tmp/iostat.err` file and displays updates in real-time. The `w_await` metric indicates the average time (in milliseconds) for a write operation to complete.*
