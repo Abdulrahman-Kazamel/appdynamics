@@ -7,6 +7,7 @@ this repository has almost got you covered. 🌟
 ### Getting Started 🎉
 Prerequisites: Before diving in, make sure to follow the steps outlined in 
 ### Sherif Medhat’s Repository.
+https://github.com/sherifadel90/AppDynamicsPoVReadyLab or https://povplaybook.appdpartnerlabs.net/
 
 Sherif’s guide will help you build a solid foundation for your AppDynamics setup. 🛠️
 
