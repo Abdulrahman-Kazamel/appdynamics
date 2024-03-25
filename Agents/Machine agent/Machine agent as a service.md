@@ -1,6 +1,6 @@
 
-```
-sudo nano /etc/systemd/system/appdynamics-machine-agent.service
+```bash
+vi /etc/systemd/system/appdynamics-machine-agent.service
 ```
 
 **Edit the Service Unit File**: Add the following content to the `appdynamics-machine-agent.service` file:
@@ -21,13 +21,13 @@ RestartSec=3
 WantedBy=multi-user.target
 ```
 
-```
+```bash
 sudo systemctl daemon-reload
 ```
 
 ## start and enable your service 
 
-```
+```bash
 sudo systemctl start appdynamics-machine-agent
 sudo systemctl enable appdynamics-machine-agent
 sudo systemctl status appdynamics-machine-agent
