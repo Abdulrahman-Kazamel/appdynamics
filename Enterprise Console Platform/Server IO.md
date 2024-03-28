@@ -7,7 +7,12 @@
 # Check mounted / path 
 df -h  
 # Run iostat to monitor disk I/O performance 
+yum -y install sysstat
 nohup iostat -myxd <mount> 5 720 > /tmp/iostat.out 2>/tmp/iostat.err &
+#for example
+nohup iostat -myxd /dev/mapper/centos-root 5 720 > /tmp/iostat.out 2>/tmp/iostat.err &
+
+tail -f /tmp/iostat.out
 ```
 
 *Replace `<mount>` with the mounted path identified in the previous step.
