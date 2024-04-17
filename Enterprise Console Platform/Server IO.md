@@ -6,6 +6,7 @@
 ```bash
 # Check mounted / path 
 df -h  
+
 # Run iostat to monitor disk I/O performance 
 yum -y install sysstat
 nohup iostat -myxd <mount> 5 720 > /tmp/iostat.out 2>/tmp/iostat.err &
@@ -13,6 +14,17 @@ nohup iostat -myxd <mount> 5 720 > /tmp/iostat.out 2>/tmp/iostat.err &
 nohup iostat -myxd /dev/mapper/centos-root 5 720 > /tmp/iostat.out 2>/tmp/iostat.err &
 
 tail -f /tmp/iostat.out
+
+#output shuld be similar to this 
+Device:         rrqm/s   wrqm/s     r/s     w/s    rMB/s    wMB/s avgrq-sz avgqu-sz   await r_await w_await  svctm  %util                                                
+
+sda2              0.00    26.40    0.00   13.60     0.00     0.85   128.47     0.02    1.41    0.00    1.41   1.16   1.58
+
+
+#or this 
+Device:         rrqm/s   wrqm/s     r/s     w/s    rMB/s    wMB/s avgrq-sz avgqu-sz   await r_await w_await  svctm  %util                                                
+
+dm-0              0.00     0.00    0.00    0.40     0.00     0.00    20.50     0.00    1.00    0.00    1.00   1.00   0.04
 ```
 
 *Replace `<mount>` with the mounted path identified in the previous step.
@@ -36,3 +48,10 @@ Monitor the write latency, indicated by the `w_await` metric, in the output of t
 
  **Continuous Monitoring**:
   Continuously monitor the disk I/O performance to ensure it meets the desired maximum write latency requirement. Adjust resources as necessary to maintain optimal performance.
+  
+  
+  ### third party tool to measure your I/O -- fio
+```
+https://github.com/axboe/fio
+```
+  

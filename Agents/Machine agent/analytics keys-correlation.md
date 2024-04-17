@@ -15,3 +15,9 @@ appdynamics.es.eum.key from admin= 7xxxx-e189-46cf-98eb-xxxxxa
 
 *Account Access in license page*
 http.event.accessKey=9xx21bc6-x0bx-4xxb-b633-fxx76xx4c5fb
+
+
+
+## some issue you may encounter incase of bad keys
+
+![[analtics logs.png]]

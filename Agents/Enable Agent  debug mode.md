@@ -26,3 +26,7 @@ Follow these steps to enable debug level capture from the agent installing direc
 3. Allow the agent to run for 10 minutes.
 4. Zip the entire folder located at `<agent_installation_dir>/ver23.x.x/logs/<node>` and send us the log files.
 5. After collecting logs, change the "debug" back to "info" in log4j2.xml.
+
+
+
+![[debug-way-logs-node-for-agent.png]]

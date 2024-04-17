@@ -6,6 +6,9 @@ cd /opt/appdynamics/machineagent/
 # Start the machine agent in the background
 java -jar machineagent.jar &
 
+##or 
+nohup java -Dappdynamics.agent.maxMetrics=300000 -Ddbagent.name=DBMon-Lab-Agent -jar db-agent.jar &
+
 # Verify that the machine agent is running
 ps -ef | grep machine
 ```

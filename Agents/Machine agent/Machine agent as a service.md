@@ -1,3 +1,14 @@
+## the best practice to set agent as a service 
+
+*to run machine agent as part of start up, copy /etc/init.d and /etc/sysconfig files to your system /etc*
+
+ *check the correct path of you agent home and user in sysconfg file*
+
+
+
+==============================================================
+
+### the below is built by community and I have tested it and worked for me but the best practice is above
 
 ```bash
 vi /etc/systemd/system/appdynamics-machine-agent.service

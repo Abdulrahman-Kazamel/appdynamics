@@ -40,12 +40,12 @@ root    hard    memlock         unlimited
    ```
 –  Check the RAM on the Controller to ensure it meets the profile requirements.
 –  Ensure there is at least 10GB swap of free space available for the Controllers.
-–  #### I personally recommend to turn it off in the whole system
+–  #### I personally recommend to turn it off the swap in the whole system
   
 ```bash
    swapoff -a
    vi /etc/fstab 
-   # please add # to swap line to stop it to run againt system restart 
+   # please add `#` to swap line to stop it to run againt system restart 
 ```
 
    
@@ -94,9 +94,14 @@ ssh hostname "echo success"
  sudo yum install glibc -y
  sudo yum install curl -y
  sudo yum install netstat -y
+ sudo yum install sysstat -y
+ sudo yum install ntp -y 
  
  # or just as one line
- sudo yum install libaio1 numactl tzdata libncurses5 glibc curl netstat -y
+ sudo yum install libaio1 numactl tzdata libncurses5 glibc curl netstat sysstat ntp -y
 
 ```
  
+![[some-validations.png]]
+
+![[controller sizing query.png]]
