@@ -11,6 +11,6 @@ df -h
 if you don't have sufficient space,  modify property 
 
 ```bash
-controller_data_min_disk_space_in_mb in file controller-medium.groovy to lower value
+controller_data_min_disk_space_in_mb in file Fm.groovy to lower value
 at /platform-admin/archives/controller/<4.5>/playbooks/controller                                                                                                
 ```

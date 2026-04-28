@@ -1,11 +1,12 @@
 
-### Change directory to where the AppDynamics Database Agent is located ```
-shell cd /opt/appdynamics/dbagent
 
+
+```shell
+
+### Change directory to where the AppDynamics Database Agent is located 
+cd /opt/appdynamics/dbagent   
 
 ### Start the Database Agent as a background process
-
-```
 nohup java -Xms1536m -Xmx1536m -Dappdynamics.agent.maxMetrics=300000 -Ddbagent.name=DBMon-Lab-Agent -jar db-agent.jar &
 ```
 

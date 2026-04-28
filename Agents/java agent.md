@@ -9,5 +9,9 @@ JAVA_OPTS="-javaagent:/opt/appdynamics/java-appagent/javaagent.jar -Dappdynamics
 
 https://community.appdynamics.com/t5/Knowledge-Base/How-do-I-instrument-multiple-JVMs-on-a-single-machine/ta-p/26265
 
+```
+### check all running process / daemons inside jvm
 
+```bash
+jps
 ```
